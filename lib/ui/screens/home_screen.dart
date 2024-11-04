@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(25, 30, 25, 30),
+                      padding: const EdgeInsets.fromLTRB(25, 30, 25, 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 "Hello, Hossam!",
                                 style: TextStyle(
                                     fontSize: 30,
@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               //setting icon
                               IconButton(
                                 onPressed: () {},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.settings,
                                   color: Colors.white,
                                   size: 30,
@@ -119,21 +119,47 @@ class _HomeScreenState extends State<HomeScreen> {
                             shrinkWrap: true,
                             children: [
                               FunctionCard(
-                                  icon: Icons.g_translate, title: "Iraab"),
+                                icon: Icons.g_translate,
+                                title: "Iraab",
+                                onTap: () {
+                                  Get.toNamed('/irab');
+                                },
+                              ),
                               FunctionCard(
-                                  icon: Icons.spellcheck, title: "Tashkeel"),
+                                icon: Icons.spellcheck,
+                                title: "Tashkeel",
+                                onTap: () {
+                                  Get.toNamed('/tashkeel');
+                                },
+                              ),
                               FunctionCard(
-                                  icon: Icons.language,
-                                  title: "MSA Conversion"),
-                              FunctionCard(icon: Icons.book, title: "Tafseer"),
-                              FunctionCard(icon: Icons.search, title: "Lookup"),
+                                icon: Icons.language,
+                                title: "MSA Conversion",
+                                onTap: () {
+                                  Get.toNamed('/msa');
+                                },
+                              ),
                               FunctionCard(
-                                  icon: Icons.record_voice_over,
-                                  title: "Quran"),
+                                icon: Icons.search,
+                                title: "Lookup",
+                                onTap: () {
+                                  Get.toNamed('/lookup');
+                                },
+                              ),
                               FunctionCard(
-                                  icon: Icons.text_fields, title: "Correction"),
+                                icon: Icons.record_voice_over,
+                                title: "Quran",
+                                onTap: () {
+                                  Get.toNamed('/quran');
+                                },
+                              ),
                               FunctionCard(
-                                  icon: Icons.auto_fix_high, title: "Enhancer"),
+                                icon: Icons.auto_fix_high,
+                                title: "Enhancer",
+                                onTap: () {
+                                  Get.toNamed('/enhancer');
+                                },
+                              ),
                             ],
                           ),
                         ],

@@ -1,6 +1,11 @@
 import 'package:app/ui/screens/auth/login_screen.dart';
+import 'package:app/ui/screens/features/irab_screen.dart';
+import 'package:app/ui/screens/features/lookup_screen.dart';
+import 'package:app/ui/screens/features/msa_screen.dart';
+import 'package:app/ui/screens/features/tashkeel_screen.dart';
 import 'package:app/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -12,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -20,7 +25,18 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.cairoTextTheme(),
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
+      //routing
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/home': (context) => const HomeScreen(),
+        '/irab': (context) => IrabScreen(),
+        '/tashkeel': (context) => TashkeelScreen(),
+        '/msa': (context) => MSAScreen(),
+        '/lookup': (context) => LookupScreen(),
+        '/quran': (context) => const HomeScreen(),
+        '/enhancer': (context) => const HomeScreen(),
+      },
     );
   }
 }
