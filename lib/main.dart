@@ -1,4 +1,5 @@
 import 'package:app/ui/screens/auth/login_screen.dart';
+import 'package:app/ui/screens/features/enhancer_screen.dart';
 import 'package:app/ui/screens/features/irab_screen.dart';
 import 'package:app/ui/screens/features/lookup_screen.dart';
 import 'package:app/ui/screens/features/msa_screen.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Allam Future Makers',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
         '/msa': (context) => MSAScreen(),
         '/lookup': (context) => LookupScreen(),
         '/quran': (context) => const HomeScreen(),
-        '/enhancer': (context) => const HomeScreen(),
+        '/enhancer': (context) => EnhancerScreen(),
+        "/chat": (context) => const HomeScreen(),
       },
     );
   }

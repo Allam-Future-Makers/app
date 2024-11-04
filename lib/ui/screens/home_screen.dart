@@ -160,6 +160,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Get.toNamed('/enhancer');
                                 },
                               ),
+                              FunctionCard(
+                                icon: Icons.chat,
+                                title: "Chat",
+                                onTap: () {
+                                  Get.toNamed('/chat');
+                                },
+                              ),
                             ],
                           ),
                         ],
