@@ -1,5 +1,5 @@
+import 'package:app/constants/ui.dart';
 import 'package:app/models/msa_response.dart';
-import 'package:app/models/tashkeel_response.dart';
 import 'package:app/services/api_service.dart';
 import 'package:app/ui/widgets/glass.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class MSAScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Modern Standard Arabic Conversion'),
       ),
-      backgroundColor: const Color(0xff1C1760),
+      backgroundColor: UIConstants.backgroundColor,
       body: Glass(
         child: SingleChildScrollView(
           child: Padding(

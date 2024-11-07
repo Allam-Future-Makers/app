@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:app/constants/ui.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff1C1760),
+      backgroundColor: UIConstants.backgroundColor,
       body: Stack(
         children: [
           Positioned(

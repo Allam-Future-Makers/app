@@ -1,3 +1,4 @@
+import 'package:app/constants/ui.dart';
 import 'package:app/models/enhancer_response.dart';
 import 'package:app/services/api_service.dart';
 import 'package:app/ui/widgets/glass.dart';
@@ -32,9 +33,12 @@ class EnhancerScreen extends StatelessWidget {
       final char = textWithMarkers[i];
       if (char == 'g') {
         if (currentWord.isNotEmpty) {
-          spans.add(TextSpan(
+          spans.add(
+            TextSpan(
               text: currentWord,
-              style: const TextStyle(color: Colors.white, fontSize: 21)));
+              style: const TextStyle(color: Colors.white, fontSize: 21),
+            ),
+          );
           currentWord = '';
         }
         isGreen = true;
@@ -61,7 +65,7 @@ class EnhancerScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Arabic Text Enhancer'),
       ),
-      backgroundColor: const Color(0xff1C1760),
+      backgroundColor: UIConstants.backgroundColor,
       body: Glass(
         child: SingleChildScrollView(
           child: Padding(

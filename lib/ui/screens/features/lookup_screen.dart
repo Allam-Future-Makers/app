@@ -1,3 +1,4 @@
+import 'package:app/constants/ui.dart';
 import 'package:app/models/dictionary_response.dart';
 import 'package:app/models/msa_response.dart';
 import 'package:app/models/tashkeel_response.dart';
@@ -21,39 +22,55 @@ class LookupScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Dictionary Lookup'),
       ),
-      backgroundColor: const Color(0xff1C1760),
+      backgroundColor: UIConstants.backgroundColor,
       body: Glass(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              //big text field to enter text
-              //button with loading inside
-              //result table
-
               children: [
                 const SizedBox(height: 20),
-                const Text(
-                  'Enter the text you want to lookup',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                const SizedBox(height: 20),
-                TextField(
-                  controller: textController,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter the text here',
-                    hintStyle: TextStyle(color: Colors.white),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Word: ',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: UIConstants.titleFontSize),
                     ),
-                  ),
-                  style: const TextStyle(color: Colors.white),
-                  maxLines: 10,
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 200),
+                        child: TextField(
+                          controller: textController,
+                          decoration: const InputDecoration(
+                            hintText: 'Word',
+                            hintStyle: TextStyle(color: Colors.white),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 20),
                 //Helper text
-                const Text("Enter the helper sentence (optional)",
-                    style: TextStyle(color: Colors.white, fontSize: 20)),
+                const Row(
+                  children: [
+                    Text(
+                      "Helper Sentence (optional):",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: UIConstants.titleFontSize),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 10),
                 TextField(
                   controller: helperTextController,
@@ -68,24 +85,26 @@ class LookupScreen extends StatelessWidget {
                   maxLines: 1,
                 ),
                 const SizedBox(height: 20),
-                Obx(() => ElevatedButton(
-                      onPressed: () {
-                        loading.value = true;
-                        ApiService()
-                            .searchDictionary(
-                                textController.text,
-                                helperTextController.text.isEmpty
-                                    ? null
-                                    : helperTextController.text)
-                            .then((value) {
-                          result.value = value;
-                          loading.value = false;
-                        });
-                      },
-                      child: loading.value
-                          ? const CircularProgressIndicator()
-                          : const Text('Process'),
-                    )),
+                Obx(
+                  () => ElevatedButton(
+                    onPressed: () {
+                      loading.value = true;
+                      ApiService()
+                          .searchDictionary(
+                              textController.text,
+                              helperTextController.text.isEmpty
+                                  ? null
+                                  : helperTextController.text)
+                          .then((value) {
+                        result.value = value;
+                        loading.value = false;
+                      });
+                    },
+                    child: loading.value
+                        ? const CircularProgressIndicator()
+                        : const Text('Lookup'),
+                  ),
+                ),
                 const SizedBox(height: 20),
                 //Result
                 Obx(

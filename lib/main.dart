@@ -1,8 +1,10 @@
 import 'package:app/ui/screens/auth/login_screen.dart';
+import 'package:app/ui/screens/features/chat_screen.dart';
 import 'package:app/ui/screens/features/enhancer_screen.dart';
 import 'package:app/ui/screens/features/irab_screen.dart';
 import 'package:app/ui/screens/features/lookup_screen.dart';
 import 'package:app/ui/screens/features/msa_screen.dart';
+import 'package:app/ui/screens/features/quran_screen.dart';
 import 'package:app/ui/screens/features/tashkeel_screen.dart';
 import 'package:app/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -30,14 +32,15 @@ class MyApp extends StatelessWidget {
       //routing
       routes: {
         '/login': (context) => const LoginScreen(),
+        '/register': (context) => const LoginScreen(),
         '/home': (context) => const HomeScreen(),
         '/irab': (context) => IrabScreen(),
         '/tashkeel': (context) => TashkeelScreen(),
         '/msa': (context) => MSAScreen(),
         '/lookup': (context) => LookupScreen(),
-        '/quran': (context) => const HomeScreen(),
+        '/quran': (context) => QuranScreen(),
         '/enhancer': (context) => EnhancerScreen(),
-        "/chat": (context) => const HomeScreen(),
+        "/chat": (context) => ChatScreen(),
       },
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:app/constants/ui.dart';
 import 'package:app/ui/widgets/function_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
       //   onPressed: () {},
       //   child: Icon(Icons.chat),
       // ),
-      backgroundColor: const Color(0xff1C1760),
+      backgroundColor: UIConstants.backgroundColor,
       body: Stack(
         children: [
           Positioned(
@@ -158,13 +159,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 title: "Enhancer",
                                 onTap: () {
                                   Get.toNamed('/enhancer');
-                                },
-                              ),
-                              FunctionCard(
-                                icon: Icons.chat,
-                                title: "Chat",
-                                onTap: () {
-                                  Get.toNamed('/chat');
                                 },
                               ),
                             ],

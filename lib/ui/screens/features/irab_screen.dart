@@ -1,3 +1,4 @@
+import 'package:app/constants/ui.dart';
 import 'package:app/models/irab_response.dart';
 import 'package:app/services/api_service.dart';
 import 'package:app/ui/widgets/glass.dart';
@@ -17,7 +18,7 @@ class IrabScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Iraab'),
       ),
-      backgroundColor: const Color(0xff1C1760),
+      backgroundColor: UIConstants.backgroundColor,
       body: Glass(
         child: SingleChildScrollView(
           child: Padding(

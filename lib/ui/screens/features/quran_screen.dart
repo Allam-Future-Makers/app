@@ -1,26 +1,25 @@
 import 'package:app/constants/ui.dart';
-import 'package:app/models/tashkeel_response.dart';
+import 'package:app/models/enhancer_response.dart';
+import 'package:app/models/quran_response.dart';
 import 'package:app/services/api_service.dart';
 import 'package:app/ui/widgets/glass.dart';
+import 'package:app/ui/widgets/sound_player.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
-class TashkeelScreen extends StatelessWidget {
-  TashkeelScreen({super.key});
+class QuranScreen extends StatelessWidget {
+  QuranScreen({super.key});
 
   final textController = TextEditingController();
   final loading = false.obs;
-  final Rx<TashkeelResponse?> result = Rx(null);
+  final Rx<QuranResponse?> result = Rx(null);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Tashkeel',
-          style: TextStyle(),
-        ),
+        title: const Text('Quran'),
       ),
       backgroundColor: UIConstants.backgroundColor,
       body: Glass(
@@ -35,14 +34,14 @@ class TashkeelScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 20),
                 const Text(
-                  'Enter the text you want to process',
+                  'Enter your question',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 const SizedBox(height: 20),
                 TextField(
                   controller: textController,
                   decoration: const InputDecoration(
-                    hintText: 'Enter the text here',
+                    hintText: 'Enter the question here',
                     hintStyle: TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
@@ -52,27 +51,27 @@ class TashkeelScreen extends StatelessWidget {
                   maxLines: 10,
                 ),
                 const SizedBox(height: 20),
-                Obx(() => ElevatedButton(
-                      onPressed: () {
-                        loading.value = true;
-                        ApiService()
-                            .getTashkeel(textController.text)
-                            .then((value) {
-                          result.value = value;
-                          loading.value = false;
-                        });
-                      },
-                      child: loading.value
-                          ? const CircularProgressIndicator()
-                          : const Text('Process'),
-                    )),
+                Obx(
+                  () => ElevatedButton(
+                    onPressed: () {
+                      loading.value = true;
+                      ApiService().getQuran(textController.text).then((value) {
+                        print(value);
+                        result.value = value;
+                        loading.value = false;
+                      });
+                    },
+                    child: loading.value
+                        ? const CircularProgressIndicator()
+                        : const Text('Search'),
+                  ),
+                ),
                 const SizedBox(height: 20),
-                //Result
                 Obx(
                   () => result.value == null
                       ? const SizedBox()
                       : const Text(
-                          "Result",
+                          "Answer",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -80,31 +79,30 @@ class TashkeelScreen extends StatelessWidget {
                         ),
                 ),
                 const SizedBox(height: 10),
+                //result is array of words (modifications) and their replacements in the original text, words without replacements are not included
                 Obx(
                   () => result.value == null
                       ? const SizedBox()
                       : Text(
-                          result.value!.diacritized,
+                          result.value!.answer,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
-                              color: Colors.white, fontSize: 23),
+                            color: Colors.white,
+                            fontSize: 23,
+                          ),
                         ),
                 ),
                 //copy button with icon
                 const SizedBox(height: 20),
+                //The sound urls found in result.links using flutter_sound
                 Obx(
                   () => result.value == null
                       ? const SizedBox()
-                      : ElevatedButton.icon(
-                          onPressed: () {
-                            //copy the result to the clipboard
-                            Clipboard.setData(
-                                ClipboardData(text: result.value!.diacritized));
-                            Get.snackbar('Copied',
-                                'The result has been copied to the clipboard');
-                          },
-                          icon: const Icon(Icons.copy),
-                          label: const Text('Copy'),
+                      : Column(
+                          children: [
+                            for (var link in result.value!.links)
+                              SoundPlayer(url: link)
+                          ],
                         ),
                 ),
               ],
