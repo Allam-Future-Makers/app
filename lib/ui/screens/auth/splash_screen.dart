@@ -16,17 +16,20 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    AppPrefs.token.then((token) {
-      if (token != null) {
-        AuthService().me(token).then((user) {
-          AppState.user.value = user;
-          Navigator.pushReplacementNamed(context, '/home');
-        }).catchError((e) {
+    //delay
+    Future.delayed(const Duration(seconds: 2), () {
+      AppPrefs.token.then((token) {
+        if (token != null) {
+          AuthService().me(token).then((user) {
+            AppState.user.value = user;
+            Navigator.pushReplacementNamed(context, '/home');
+          }).catchError((e) {
+            Navigator.pushReplacementNamed(context, '/login');
+          });
+        } else {
           Navigator.pushReplacementNamed(context, '/login');
-        });
-      } else {
-        Navigator.pushReplacementNamed(context, '/login');
-      }
+        }
+      });
     });
   }
 

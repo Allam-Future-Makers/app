@@ -168,8 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       AppState.user.value = value.user;
                                       loading.value = false;
                                       error.value = "";
-                                      print("Helloooooo");
-                                      Get.toNamed("/home");
+                                      Get.toNamed("/homee");
                                     }).catchError(
                                       (e) {
                                         if (e is DioException) {

@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
-        '/home': (context) => const HomeScreen(),
+        '/homee': (context) => const HomeScreen(),
         '/irab': (context) => IrabScreen(),
         '/tashkeel': (context) => TashkeelScreen(),
         '/msa': (context) => MSAScreen(),

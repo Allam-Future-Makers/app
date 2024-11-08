@@ -92,11 +92,6 @@ class _ChatScreenState extends State<ChatScreen> {
           message,
         );
         _messageController.clear();
-
-        //remove image and voice data and reset all
-        _imageData = null;
-        _image = null;
-        _voiceData = null;
       });
 
       AppPrefs.token.then((us) {
@@ -114,6 +109,11 @@ class _ChatScreenState extends State<ChatScreen> {
           _messages.removeLast();
           _messages.add(message);
           setState(() {});
+        });
+        setState(() {
+          _imageData = null;
+          _image = null;
+          _voiceData = null;
         });
       });
     }

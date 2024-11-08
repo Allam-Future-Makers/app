@@ -20,7 +20,11 @@ class ChatMessageWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                if (message.imageUrl != null) Image.network(message.imageUrl!),
+                if (message.imageUrl != null)
+                  Image.network(
+                    message.imageUrl!,
+                    width: 100,
+                  ),
               ],
             ),
           ),

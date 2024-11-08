@@ -184,12 +184,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       _passwordController.text,
                                     )
                                         .then((value) {
-                                      print(value.token);
                                       AppPrefs.setToken(value.token);
                                       AppState.user.value = value.user;
                                       loading.value = false;
                                       error.value = "";
-                                      Get.toNamed("/home");
+                                      Get.toNamed("/homee");
                                     }).catchError(
                                       (e) {
                                         if (e is DioException) {
