@@ -19,7 +19,7 @@ class ApiService {
 
   static Dio createDio() {
     var dio = Dio(BaseOptions(
-      baseUrl: Constants.baseUrl,
+      baseUrl: Constants.dataBaseUrl,
     ));
 
     return dio;
@@ -102,10 +102,12 @@ class ApiService {
       Uint8List? voiceData}) async {
     try {
       final formData = FormData.fromMap({
-          'id': id,
-        if(query != null) 'query': query,
-        if(imageData != null) 'image': MultipartFile.fromBytes(imageData, filename: 'image.jpg'),
-        if(voiceData != null) 'voice': MultipartFile.fromBytes(voiceData, filename: 'voice.wav'),
+        'id': id,
+        if (query != null) 'query': query,
+        if (imageData != null)
+          'image': MultipartFile.fromBytes(imageData, filename: 'image.jpg'),
+        if (voiceData != null)
+          'voice': MultipartFile.fromBytes(voiceData, filename: 'voice.wav'),
       });
 
       final response = await dio.post('/chat',

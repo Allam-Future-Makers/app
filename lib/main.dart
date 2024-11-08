@@ -1,4 +1,6 @@
 import 'package:app/ui/screens/auth/login_screen.dart';
+import 'package:app/ui/screens/auth/register_screen.dart';
+import 'package:app/ui/screens/auth/splash_screen.dart';
 import 'package:app/ui/screens/features/chat_screen.dart';
 import 'package:app/ui/screens/features/enhancer_screen.dart';
 import 'package:app/ui/screens/features/irab_screen.dart';
@@ -28,11 +30,11 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.cairoTextTheme(),
       ),
-      home: const HomeScreen(),
+      home: const SplashScreen(),
       //routing
       routes: {
         '/login': (context) => const LoginScreen(),
-        '/register': (context) => const LoginScreen(),
+        '/register': (context) => const RegisterScreen(),
         '/home': (context) => const HomeScreen(),
         '/irab': (context) => IrabScreen(),
         '/tashkeel': (context) => TashkeelScreen(),

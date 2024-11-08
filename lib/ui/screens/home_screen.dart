@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:app/constants/ui.dart';
+import 'package:app/providers/state.dart';
 import 'package:app/ui/widgets/function_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -94,12 +95,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "Hello, Hossam!",
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                              Obx(
+                                () => Text(
+                                  "Hello, ${AppState.user.value?.name ?? "N/A"}!",
+                                  style: const TextStyle(
+                                      fontSize: 30,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                               const Spacer(),
                               //setting icon

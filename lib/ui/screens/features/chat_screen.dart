@@ -93,7 +93,8 @@ class _ChatScreenState extends State<ChatScreen> {
         _messageController.clear();
       });
 
-      AppPrefs.userId.then((us) {
+      AppPrefs.token.then((us) {
+        if (us == null) return;
         ApiService()
             .chat(id: us, query: message.query, imageData: _imageData)
             .then((response) {
