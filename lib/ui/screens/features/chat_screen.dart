@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:app/constants/ui.dart';
 import 'package:app/models/chat_message.dart';
+import 'package:app/providers/state.dart';
 import 'package:app/services/api_service.dart';
 import 'package:app/services/prefs_service.dart';
 import 'package:app/ui/intents/new_line_intent.dart';
@@ -91,14 +92,24 @@ class _ChatScreenState extends State<ChatScreen> {
           message,
         );
         _messageController.clear();
+
+        //remove image and voice data and reset all
+        _imageData = null;
+        _image = null;
+        _voiceData = null;
       });
 
       AppPrefs.token.then((us) {
         if (us == null) return;
         ApiService()
-            .chat(id: us, query: message.query, imageData: _imageData)
+            .chat(
+                id: AppState.user.value!.id,
+                query: message.query,
+                imageData: _imageData)
             .then((response) {
           message.answer = response.answer;
+          message.imageUrl = response.imageUrl;
+          message.voiceUrl = response.voiceUrl;
           //update in the list
           _messages.removeLast();
           _messages.add(message);
@@ -172,7 +183,7 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             Expanded(
               child: ListView.builder(
-                reverse: true, // Start from the bottom for chat experience
+                reverse: false, // Start from the bottom for chat experience
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 itemCount: _messages.length,

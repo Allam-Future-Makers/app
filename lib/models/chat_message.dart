@@ -1,24 +1,22 @@
-import 'dart:typed_data';
-
 class ChatMessage {
+  String? query;
   String? answer;
-  final String? query;
-  final Uint8List? imageData;
-  final Uint8List? voiceData;
+  String? imageUrl;
+  String? voiceUrl;
 
   ChatMessage({
     this.query,
     this.answer,
-    this.imageData,
-    this.voiceData,
+    this.imageUrl,
+    this.voiceUrl,
   });
 
   factory ChatMessage.fromJson(Map<String, dynamic> json) {
     return ChatMessage(
       query: json['query'],
       answer: json['answer'],
-      imageData: json['imageUrl'],
-      voiceData: json['voiceUrl'],
+      imageUrl: json['imageUrl'],
+      voiceUrl: json['voiceUrl'],
     );
   }
 }

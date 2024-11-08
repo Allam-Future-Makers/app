@@ -10,7 +10,7 @@ class ChatMessageWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (message.imageData != null || message.voiceData != null)
+        if (message.imageUrl != null || message.voiceUrl != null)
           Container(
             margin: const EdgeInsets.all(10),
             padding: const EdgeInsets.all(10),
@@ -20,7 +20,7 @@ class ChatMessageWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                if (message.imageData != null) Image.memory(message.imageData!),
+                if (message.imageUrl != null) Image.network(message.imageUrl!),
               ],
             ),
           ),
@@ -47,7 +47,7 @@ class ChatMessageWidget extends StatelessWidget {
             ),
           ),
         if (message.answer == null) const LinearProgressIndicator(),
-        if (message.voiceData != null)
+        if (message.voiceUrl != null)
           ElevatedButton(
             onPressed: () {},
             child: const Text('Play Voice'),

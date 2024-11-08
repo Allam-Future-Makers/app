@@ -101,13 +101,17 @@ class ApiService {
       Uint8List? imageData,
       Uint8List? voiceData}) async {
     try {
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+
       final formData = FormData.fromMap({
         'id': id,
         if (query != null) 'query': query,
         if (imageData != null)
-          'image': MultipartFile.fromBytes(imageData, filename: 'image.jpg'),
+          'image':
+              MultipartFile.fromBytes(imageData, filename: 'image_$timestamp'),
         if (voiceData != null)
-          'voice': MultipartFile.fromBytes(voiceData, filename: 'voice.wav'),
+          'voice':
+              MultipartFile.fromBytes(voiceData, filename: 'voice_$timestamp'),
       });
 
       final response = await dio.post('/chat',
