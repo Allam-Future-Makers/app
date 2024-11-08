@@ -18,11 +18,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       //bottom bar with middle fab for chat
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //   child: Icon(Icons.chat),
-      // ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.toNamed('/chat');
+        },
+        child: const Icon(Icons.chat),
+      ),
       backgroundColor: UIConstants.backgroundColor,
       body: Stack(
         children: [
@@ -161,6 +163,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Get.toNamed('/enhancer');
                                 },
                               ),
+                              // FunctionCard(
+                              //   icon: Icons.chat,
+                              //   title: "Chat",
+                              //   onTap: () {
+                              //     Get.toNamed('/chat');
+                              //   },
+                              // ),
                             ],
                           ),
                         ],

@@ -64,6 +64,16 @@ class IrabScreen extends StatelessWidget {
                 Obx(
                   () => result.value == null
                       ? const SizedBox()
+                      : Text(
+                          result.value!.diacratizedSentence,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 20),
+                        ),
+                ),
+                Obx(
+                  () => result.value == null
+                      ? const SizedBox()
                       : DataTable(
                           headingTextStyle: const TextStyle(
                             color: Colors.white,
@@ -76,10 +86,52 @@ class IrabScreen extends StatelessWidget {
                             DataColumn(label: Text('Irab')),
                           ],
                           rows: result.value!.irabResults
-                              .map((e) => DataRow(cells: [
+                              .map(
+                                (e) => DataRow(
+                                  cells: [
                                     DataCell(Text(e.word)),
                                     DataCell(Text(e.irab)),
-                                  ]))
+                                  ],
+                                ),
+                              )
+                              .toList(),
+                        ),
+                ),
+                const SizedBox(height: 20),
+                Obx(
+                  () => result.value == null ||
+                          result.value!.specialSentences.isEmpty
+                      ? const SizedBox()
+                      : const Text(
+                          'Special Sentences', //تراكيب نحوية
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                ),
+                const SizedBox(height: 20),
+                Obx(
+                  () => result.value == null ||
+                          result.value!.specialSentences.isEmpty
+                      ? const SizedBox()
+                      : DataTable(
+                          headingTextStyle: const TextStyle(
+                            color: Colors.white,
+                          ),
+                          dataTextStyle: const TextStyle(
+                            color: Colors.white,
+                          ),
+                          columns: const [
+                            DataColumn(label: Text('Sentence')),
+                            DataColumn(label: Text('Irab')),
+                          ],
+                          rows: result.value!.specialSentences
+                              .map(
+                                (e) => DataRow(
+                                  cells: [
+                                    DataCell(Text(e.sentence)),
+                                    DataCell(Text(e.irab)),
+                                  ],
+                                ),
+                              )
                               .toList(),
                         ),
                 ),

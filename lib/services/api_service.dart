@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:app/constants/constants.dart';
 import 'package:app/models/chat_response.dart';
 import 'package:app/models/dictionary_response.dart';
@@ -94,16 +96,28 @@ class ApiService {
   }
 
   Future<ChatResponse> chat(
-      String id, String query, String? imageUrl, String? voiceUrl) async {
+      {required String id,
+      String? query,
+      Uint8List? imageData,
+      Uint8List? voiceData}) async {
     try {
-      final response = await dio.post('/agent', data: {
-        "id": id,
-        "query": query,
-        "image_url": imageUrl,
-        "voice_url": voiceUrl,
+      final formData = FormData.fromMap({
+          'id': id,
+        if(query != null) 'query': query,
+        if(imageData != null) 'image': MultipartFile.fromBytes(imageData, filename: 'image.jpg'),
+        if(voiceData != null) 'voice': MultipartFile.fromBytes(voiceData, filename: 'voice.wav'),
       });
+
+      final response = await dio.post('/chat',
+          data: formData,
+          options: Options(
+            receiveDataWhenStatusError: true,
+            validateStatus: (status) => true,
+          ));
+      print(response.data);
       return ChatResponse.fromJson(response.data);
     } catch (e) {
+      print(e.toString());
       rethrow;
     }
   }

@@ -27,7 +27,7 @@ class PreferencesHelper {
 
   static Future<String> getString(String key) async {
     final p = await prefs;
-    return p.getString(key) ?? '';
+    return p.getString(key) ?? 'default';
   }
 
   static Future setString(String key, String value) async {
