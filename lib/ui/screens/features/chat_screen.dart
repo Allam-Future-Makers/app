@@ -177,6 +177,7 @@ class _ChatScreenState extends State<ChatScreen> {
       String fileName = filePath.split('/').last;
       print(fileName);
       _voiceData = response.data;
+      setState(() {});
     } on Exception catch (e) {
       print(e);
     }
