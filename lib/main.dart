@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
       title: 'Allam Future Makers',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.deepPurple, brightness: Brightness.dark),
         useMaterial3: true,
         textTheme: GoogleFonts.cairoTextTheme(),
       ),

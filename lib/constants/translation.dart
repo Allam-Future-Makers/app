@@ -44,6 +44,11 @@ class AppTranslations {
     "question_here": "Enter your question here",
     "tashkeel_enter": "Enter the text you want to diacritize",
     "process": "Process",
+    "settings": "Settings",
+    "language": "Language",
+    "arabic": "Arabic",
+    "english": "English",
+    "logout": "Logout",
   };
 
   static final Map<String, String> ar = {
@@ -86,5 +91,10 @@ class AppTranslations {
     "question_here": "أدخل سؤالك هنا",
     "tashkeel_enter": "أدخل النص الذي تريد تشكيله",
     "process": "تشكيل",
+    "settings": "الإعدادات",
+    "language": "اللغة",
+    "arabic": "العربية",
+    "english": "الإنجليزية",
+    "logout": "تسجيل الخروج",
   };
 }
