@@ -1,11 +1,9 @@
 import 'package:app/constants/ui.dart';
-import 'package:app/models/enhancer_response.dart';
 import 'package:app/models/quran_response.dart';
 import 'package:app/services/api_service.dart';
 import 'package:app/ui/widgets/glass.dart';
 import 'package:app/ui/widgets/sound_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class QuranScreen extends StatelessWidget {
@@ -19,7 +17,7 @@ class QuranScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Quran'),
+        title: Text("quran".tr),
       ),
       backgroundColor: UIConstants.backgroundColor,
       body: Glass(
@@ -40,10 +38,10 @@ class QuranScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 TextField(
                   controller: textController,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter the question here',
-                    hintStyle: TextStyle(color: Colors.white),
-                    border: OutlineInputBorder(
+                  decoration: InputDecoration(
+                    hintText: 'question_here'.tr,
+                    hintStyle: const TextStyle(color: Colors.white),
+                    border: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
                   ),
@@ -70,9 +68,9 @@ class QuranScreen extends StatelessWidget {
                 Obx(
                   () => result.value == null
                       ? const SizedBox()
-                      : const Text(
-                          "Answer",
-                          style: TextStyle(
+                      : Text(
+                          "answer".tr,
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
@@ -92,7 +90,6 @@ class QuranScreen extends StatelessWidget {
                           ),
                         ),
                 ),
-                //copy button with icon
                 const SizedBox(height: 20),
                 //The sound urls found in result.links using flutter_sound
                 Obx(

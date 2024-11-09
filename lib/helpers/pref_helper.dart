@@ -30,8 +30,11 @@ class PreferencesHelper {
     return p.getString(key);
   }
 
-  static Future setString(String key, String value) async {
+  static Future setString(String key, String? value) async {
     final p = await prefs;
+    if (value == null) {
+      return p.remove(key);
+    }
     return p.setString(key, value);
   }
 

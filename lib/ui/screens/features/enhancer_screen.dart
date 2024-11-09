@@ -63,7 +63,7 @@ class EnhancerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Arabic Text Enhancer'),
+        title: Text("enhancer".tr),
       ),
       backgroundColor: UIConstants.backgroundColor,
       body: Glass(
@@ -77,15 +77,15 @@ class EnhancerScreen extends StatelessWidget {
 
               children: [
                 const SizedBox(height: 20),
-                const Text(
-                  'Enter the text you want to enhance',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                Text(
+                  'enhancer_enter'.tr,
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 const SizedBox(height: 20),
                 TextField(
                   controller: textController,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter the text here',
+                  decoration: InputDecoration(
+                    hintText: "text_here".tr,
                     hintStyle: TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
@@ -107,7 +107,7 @@ class EnhancerScreen extends StatelessWidget {
                       },
                       child: loading.value
                           ? const CircularProgressIndicator()
-                          : const Text('Process'),
+                          : Text("enhance".tr),
                     )),
                 const SizedBox(height: 20),
                 //Result
@@ -153,11 +153,10 @@ class EnhancerScreen extends StatelessWidget {
                               return replacement;
                             }).join(' ');
                             Clipboard.setData(ClipboardData(text: finalText));
-                            Get.snackbar('Copied',
-                                'The result has been copied to the clipboard');
+                            Get.snackbar("copied".tr, "copy_done".tr);
                           },
                           icon: const Icon(Icons.copy),
-                          label: const Text('Copy'),
+                          label: Text("copy".tr),
                         ),
                 ),
               ],

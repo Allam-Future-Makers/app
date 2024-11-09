@@ -17,10 +17,7 @@ class TashkeelScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Tashkeel',
-          style: TextStyle(),
-        ),
+        title: Text('tashkeel'.tr),
       ),
       backgroundColor: UIConstants.backgroundColor,
       body: Glass(
@@ -34,17 +31,17 @@ class TashkeelScreen extends StatelessWidget {
 
               children: [
                 const SizedBox(height: 20),
-                const Text(
-                  'Enter the text you want to process',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                Text(
+                  "tashkeel_enter".tr,
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 const SizedBox(height: 20),
                 TextField(
                   controller: textController,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter the text here',
-                    hintStyle: TextStyle(color: Colors.white),
-                    border: OutlineInputBorder(
+                  decoration: InputDecoration(
+                    hintText: 'text_here'.tr,
+                    hintStyle: const TextStyle(color: Colors.white),
+                    border: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
                   ),
@@ -64,19 +61,20 @@ class TashkeelScreen extends StatelessWidget {
                       },
                       child: loading.value
                           ? const CircularProgressIndicator()
-                          : const Text('Process'),
+                          : Text('process'.tr),
                     )),
                 const SizedBox(height: 20),
                 //Result
                 Obx(
                   () => result.value == null
                       ? const SizedBox()
-                      : const Text(
-                          "Result",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+                      : Text(
+                          "result".tr,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                 ),
                 const SizedBox(height: 10),
@@ -100,11 +98,10 @@ class TashkeelScreen extends StatelessWidget {
                             //copy the result to the clipboard
                             Clipboard.setData(
                                 ClipboardData(text: result.value!.diacritized));
-                            Get.snackbar('Copied',
-                                'The result has been copied to the clipboard');
+                            Get.snackbar("copied".tr, "copy_done".tr);
                           },
                           icon: const Icon(Icons.copy),
-                          label: const Text('Copy'),
+                          label: Text('copy'.tr),
                         ),
                 ),
               ],

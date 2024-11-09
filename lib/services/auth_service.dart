@@ -70,7 +70,7 @@ class AuthService {
               'Authorization': 'Bearer $token',
             },
           ));
-
+      print(response.data);
       return User.fromJson(response.data);
     } catch (e) {
       rethrow;

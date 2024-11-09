@@ -91,10 +91,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Center(
+                      Center(
                         child: Text(
-                          "Login",
-                          style: TextStyle(
+                          "login".tr,
+                          style: const TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextField(
                         controller: _emailController,
                         decoration: InputDecoration(
-                          hintText: "Email",
+                          hintText: "email".tr,
                           hintStyle:
                               TextStyle(color: Colors.grey[400], fontSize: 20),
                           filled: true,
@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextField(
                         controller: _passwordController,
                         decoration: InputDecoration(
-                          hintText: "Password",
+                          hintText: "password".tr,
                           hintStyle:
                               TextStyle(color: Colors.grey[400], fontSize: 20),
                           filled: true,
@@ -176,7 +176,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                               e.response!.data['error'];
                                         }
                                         loading.value = false;
-                                        print(e);
                                       },
                                     );
                                   },
@@ -190,10 +189,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             child: loading.value
                                 ? const CircularProgressIndicator()
-                                : const Text(
-                                    "Login",
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.white),
+                                : Text(
+                                    "login".tr,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                    ),
                                   ),
                           ),
                         ),
@@ -217,9 +218,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {
                             Get.toNamed('/register');
                           },
-                          child: const Text(
-                            "Create Account",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          child: Text(
+                            "new_acc".tr,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 18),
                           ),
                         ),
                       ),

@@ -16,7 +16,7 @@ class IrabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Iraab'),
+        title: Text("irab".tr),
       ),
       backgroundColor: UIConstants.backgroundColor,
       body: Glass(
@@ -30,17 +30,17 @@ class IrabScreen extends StatelessWidget {
 
               children: [
                 const SizedBox(height: 20),
-                const Text(
-                  'Enter the text you want to analyze',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                Text(
+                  "irab_enter".tr,
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 const SizedBox(height: 20),
                 TextField(
                   controller: textController,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter the text here',
-                    hintStyle: TextStyle(color: Colors.white),
-                    border: OutlineInputBorder(
+                  decoration: InputDecoration(
+                    hintText: "text_here".tr,
+                    hintStyle: const TextStyle(color: Colors.white),
+                    border: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
                   ),
@@ -58,7 +58,7 @@ class IrabScreen extends StatelessWidget {
                       },
                       child: loading.value
                           ? const CircularProgressIndicator()
-                          : const Text('Analyze'),
+                          : Text('do_irab'.tr),
                     )),
                 const SizedBox(height: 20),
                 Obx(
@@ -81,9 +81,9 @@ class IrabScreen extends StatelessWidget {
                           dataTextStyle: const TextStyle(
                             color: Colors.white,
                           ),
-                          columns: const [
-                            DataColumn(label: Text('Word')),
-                            DataColumn(label: Text('Irab')),
+                          columns: [
+                            DataColumn(label: Text('word'.tr)),
+                            DataColumn(label: Text('word_irab'.tr)),
                           ],
                           rows: result.value!.irabResults
                               .map(
@@ -102,9 +102,10 @@ class IrabScreen extends StatelessWidget {
                   () => result.value == null ||
                           result.value!.specialSentences.isEmpty
                       ? const SizedBox()
-                      : const Text(
-                          'Special Sentences', //تراكيب نحوية
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                      : Text(
+                          'irab_special'.tr, //تراكيب نحوية
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 20),
                         ),
                 ),
                 const SizedBox(height: 20),
@@ -119,9 +120,9 @@ class IrabScreen extends StatelessWidget {
                           dataTextStyle: const TextStyle(
                             color: Colors.white,
                           ),
-                          columns: const [
-                            DataColumn(label: Text('Sentence')),
-                            DataColumn(label: Text('Irab')),
+                          columns: [
+                            DataColumn(label: Text('sentence'.tr)),
+                            DataColumn(label: Text('word_irab'.tr)),
                           ],
                           rows: result.value!.specialSentences
                               .map(

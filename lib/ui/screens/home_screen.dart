@@ -5,7 +5,6 @@ import 'package:app/providers/state.dart';
 import 'package:app/ui/widgets/function_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_common/get_reset.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,10 +20,16 @@ class _HomeScreenState extends State<HomeScreen> {
       //bottom bar with middle fab for chat
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
         onPressed: () {
           Get.toNamed('/chat');
         },
-        child: const Icon(Icons.chat),
+        child: const Icon(
+          Icons.chat,
+          size: 35,
+        ),
       ),
       backgroundColor: UIConstants.backgroundColor,
       body: Stack(
@@ -47,19 +52,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     ]),
               )),
           Positioned(
-              top: 130,
-              left: 220,
-              child: Container(
-                width: 300,
-                height: 300,
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(colors: [
-                      Color(0xff744ff9),
-                      Color(0xff8369de),
-                      Color(0xff8da0cb)
-                    ])),
-              )),
+            top: 130,
+            left: 220,
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xff744ff9),
+                    Color(0xff8369de),
+                    Color(0xff8da0cb)
+                  ],
+                ),
+              ),
+            ),
+          ),
           Positioned(
               bottom: 250,
               right: 150,
@@ -69,12 +78,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 180,
                   height: 180,
                   decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(colors: [
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [
                         Color(0xff744ff9),
                         Color(0xff8369de),
                         Color(0xff8da0cb)
-                      ])),
+                      ],
+                    ),
+                  ),
                 ),
               )),
           Center(
@@ -97,17 +109,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Obx(
                                 () => Text(
-                                  "Hello, ${AppState.user.value?.name ?? "N/A"}!",
+                                  "${"hello".tr}, ${AppState.user.value?.name.split(" ").first ?? "N/A"}!",
                                   style: const TextStyle(
-                                      fontSize: 30,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                                    fontSize: 30,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                               const Spacer(),
                               //setting icon
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.toNamed('/settings');
+                                },
                                 icon: const Icon(
                                   Icons.settings,
                                   color: Colors.white,
@@ -126,44 +141,37 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               FunctionCard(
                                 icon: Icons.g_translate,
-                                title: "Iraab",
+                                title: "irab".tr,
                                 onTap: () {
                                   Get.toNamed('/irab');
                                 },
                               ),
                               FunctionCard(
                                 icon: Icons.spellcheck,
-                                title: "Tashkeel",
+                                title: "tashkeel".tr,
                                 onTap: () {
                                   Get.toNamed('/tashkeel');
                                 },
                               ),
                               FunctionCard(
                                 icon: Icons.language,
-                                title: "MSA Conversion",
+                                title: "msa".tr,
                                 onTap: () {
                                   Get.toNamed('/msa');
                                 },
                               ),
                               FunctionCard(
                                 icon: Icons.search,
-                                title: "Lookup",
+                                title: "lookup".tr,
                                 onTap: () {
                                   Get.toNamed('/lookup');
                                 },
                               ),
                               FunctionCard(
                                 icon: Icons.record_voice_over,
-                                title: "Quran",
+                                title: "quran".tr,
                                 onTap: () {
                                   Get.toNamed('/quran');
-                                },
-                              ),
-                              FunctionCard(
-                                icon: Icons.auto_fix_high,
-                                title: "Enhancer",
-                                onTap: () {
-                                  Get.toNamed('/enhancer');
                                 },
                               ),
                               // FunctionCard(

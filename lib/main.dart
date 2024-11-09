@@ -1,3 +1,4 @@
+import 'package:app/constants/translation.dart';
 import 'package:app/ui/screens/auth/login_screen.dart';
 import 'package:app/ui/screens/auth/register_screen.dart';
 import 'package:app/ui/screens/auth/splash_screen.dart';
@@ -9,6 +10,7 @@ import 'package:app/ui/screens/features/msa_screen.dart';
 import 'package:app/ui/screens/features/quran_screen.dart';
 import 'package:app/ui/screens/features/tashkeel_screen.dart';
 import 'package:app/ui/screens/home_screen.dart';
+import 'package:app/ui/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,6 +25,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      translationsKeys: AppTranslations.keys,
+      locale: const Locale('ar'),
+      fallbackLocale: const Locale('en'),
+
       title: 'Allam Future Makers',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -30,9 +36,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.cairoTextTheme(),
       ),
-      home: const SplashScreen(),
       //routing
       routes: {
+        "/": (context) => const SplashScreen(),
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/homee': (context) => const HomeScreen(),
@@ -42,7 +48,8 @@ class MyApp extends StatelessWidget {
         '/lookup': (context) => LookupScreen(),
         '/quran': (context) => QuranScreen(),
         '/enhancer': (context) => EnhancerScreen(),
-        "/chat": (context) => ChatScreen(),
+        "/chat": (context) => const ChatScreen(),
+        "/settings": (context) => const SettingsScreen(),
       },
     );
   }

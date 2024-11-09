@@ -92,10 +92,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Center(
+                      Center(
                         child: Text(
-                          "Register",
-                          style: TextStyle(
+                          "register".tr,
+                          style: const TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -106,7 +106,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextField(
                         controller: _nameController,
                         decoration: InputDecoration(
-                          hintText: "Full Name",
+                          hintText: "name".tr,
                           hintStyle:
                               TextStyle(color: Colors.grey[400], fontSize: 20),
                           filled: true,
@@ -124,7 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextField(
                         controller: _emailController,
                         decoration: InputDecoration(
-                          hintText: "Email",
+                          hintText: "email".tr,
                           hintStyle:
                               TextStyle(color: Colors.grey[400], fontSize: 20),
                           filled: true,
@@ -142,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextField(
                         controller: _passwordController,
                         decoration: InputDecoration(
-                          hintText: "Password",
+                          hintText: "password".tr,
                           hintStyle:
                               TextStyle(color: Colors.grey[400], fontSize: 20),
                           filled: true,
@@ -209,9 +209,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             child: loading.value
                                 ? const CircularProgressIndicator()
-                                : const Text(
-                                    "Register",
-                                    style: TextStyle(
+                                : Text(
+                                    "register".tr,
+                                    style: const TextStyle(
                                         fontSize: 20, color: Colors.white),
                                   ),
                           ),
@@ -224,9 +224,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onPressed: () {
                             Get.toNamed('/login');
                           },
-                          child: const Text(
-                            "Already have an account? Login now",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          child: Text(
+                            "already_have_an_account".tr,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                       ),

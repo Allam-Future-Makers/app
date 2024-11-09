@@ -22,9 +22,10 @@ class _SplashScreenState extends State<SplashScreen> {
         if (token != null) {
           AuthService().me(token).then((user) {
             AppState.user.value = user;
-            Navigator.pushReplacementNamed(context, '/home');
+            Navigator.pushReplacementNamed(context, '/homee');
           }).catchError((e) {
             Navigator.pushReplacementNamed(context, '/login');
+            print(e);
           });
         } else {
           Navigator.pushReplacementNamed(context, '/login');
@@ -48,9 +49,9 @@ class _SplashScreenState extends State<SplashScreen> {
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
                       color: Colors.white)),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               CircularProgressIndicator(),
-              const SizedBox(height: 200),
+              SizedBox(height: 200),
               Text(
                 "Allam Future Makers",
                 style: TextStyle(fontSize: 20, color: Colors.white),

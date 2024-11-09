@@ -1,7 +1,5 @@
 import 'package:app/constants/ui.dart';
 import 'package:app/models/dictionary_response.dart';
-import 'package:app/models/msa_response.dart';
-import 'package:app/models/tashkeel_response.dart';
 import 'package:app/services/api_service.dart';
 import 'package:app/ui/widgets/glass.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +18,7 @@ class LookupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dictionary Lookup'),
+        title: Text("lookup".tr),
       ),
       backgroundColor: UIConstants.backgroundColor,
       body: Glass(
@@ -34,11 +32,12 @@ class LookupScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Word: ',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: UIConstants.titleFontSize),
+                    Text(
+                      '${"word".tr}: ',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: UIConstants.titleFontSize,
+                      ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
@@ -46,10 +45,10 @@ class LookupScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 200),
                         child: TextField(
                           controller: textController,
-                          decoration: const InputDecoration(
-                            hintText: 'Word',
-                            hintStyle: TextStyle(color: Colors.white),
-                            border: OutlineInputBorder(
+                          decoration: InputDecoration(
+                            hintText: "word".tr,
+                            hintStyle: const TextStyle(color: Colors.white),
+                            border: const OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
                             ),
                           ),
@@ -61,11 +60,11 @@ class LookupScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 //Helper text
-                const Row(
+                Row(
                   children: [
                     Text(
-                      "Helper Sentence (optional):",
-                      style: TextStyle(
+                      "${"helper_sentence".tr}:",
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: UIConstants.titleFontSize),
                     ),
@@ -74,10 +73,10 @@ class LookupScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 TextField(
                   controller: helperTextController,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter the helper sentence here',
-                    hintStyle: TextStyle(color: Colors.white),
-                    border: OutlineInputBorder(
+                  decoration: InputDecoration(
+                    hintText: 'helper_enter'.tr,
+                    hintStyle: const TextStyle(color: Colors.white),
+                    border: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                     ),
                   ),
@@ -102,7 +101,7 @@ class LookupScreen extends StatelessWidget {
                     },
                     child: loading.value
                         ? const CircularProgressIndicator()
-                        : const Text('Lookup'),
+                        : Text('search'.tr),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -110,12 +109,13 @@ class LookupScreen extends StatelessWidget {
                 Obx(
                   () => result.value == null
                       ? const SizedBox()
-                      : const Text(
-                          "Answer",
+                      : Text(
+                          "answer".tr,
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                 ),
                 const SizedBox(height: 10),
@@ -141,11 +141,10 @@ class LookupScreen extends StatelessWidget {
                             //copy the result to the clipboard
                             Clipboard.setData(
                                 ClipboardData(text: result.value!.answer));
-                            Get.snackbar('Copied',
-                                'The result has been copied to the clipboard');
+                            Get.snackbar("copied".tr, "copy_done".tr);
                           },
                           icon: const Icon(Icons.copy),
-                          label: const Text('Copy'),
+                          label: Text('copy'.tr),
                         ),
                 ),
               ],

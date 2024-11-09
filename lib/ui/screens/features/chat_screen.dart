@@ -13,7 +13,7 @@ import 'package:app/ui/widgets/glass.dart';
 import 'package:app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:flutter_sound/public/flutter_sound_recorder.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -175,7 +175,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chat'),
+        title: Text('chat'.tr),
       ),
       backgroundColor: UIConstants.backgroundColor,
       body: Glass(
@@ -287,8 +287,8 @@ class _ChatScreenState extends State<ChatScreen> {
                               controller: _messageController,
                               maxLines: null,
                               onSubmitted: (value) => _sendMessage(),
-                              decoration: const InputDecoration(
-                                hintText: 'Type a message',
+                              decoration: InputDecoration(
+                                hintText: "type".tr,
                                 border: InputBorder.none,
                               ),
                             ),

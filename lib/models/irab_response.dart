@@ -1,28 +1,3 @@
-/*
-{
-    "original_sentence": "الحمدلله رب العالمين",
-    "irab_results": [
-        {
-            "word": "الحمد",
-            "irab": "مبتدأ مرفوع وعلامة رفعه الضمة الظاهرة"
-        },
-        {
-            "word": "لله",
-            "irab": "اللام حرف جر، ولفظ الجلالة اسم مجرور وعلامة جره الكسرة. وشبه الجملة \"لله\" في محل رفع خبر"
-        },
-        {
-            "word": "رب",
-            "irab": "بدل من \"الله\" مجرور وعلامة جره الكسرة"
-        },
-        {
-            "word": "العالمين",
-            "irab": "مضاف إليه مجرور وعلامة جره الياء لأنه جمع مذكر سالم"
-        }
-    ],
-    "special_sentences": []
-}
-*/
-
 class IrabResponse {
   final String originalSentence;
   final List<IrabResult> irabResults;
