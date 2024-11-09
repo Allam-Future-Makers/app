@@ -3,6 +3,7 @@ import 'package:app/models/irab_response.dart';
 import 'package:app/services/api_service.dart';
 import 'package:app/ui/widgets/glass.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:get/get.dart';
 
 class IrabScreen extends StatelessWidget {
@@ -11,6 +12,7 @@ class IrabScreen extends StatelessWidget {
   final textController = TextEditingController();
   final loading = false.obs;
   final Rx<IrabResponse?> result = Rx(null);
+  final RxDouble rate = 0.0.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -136,11 +138,80 @@ class IrabScreen extends StatelessWidget {
                               .toList(),
                         ),
                 ),
+                // const SizedBox(height: 20),
+                // //rate the answer
+                // Text("rate".tr,
+                //     style: const TextStyle(color: Colors.white, fontSize: 20)),
+                // const SizedBox(height: 10),
+                // Obx(
+                //   () => RatingStars(
+                //     value: rate.value,
+                //     onValueChanged: (v) {
+                //       rate.value = v;
+                //       _showFeedbackDialog();
+                //     },
+                //     starBuilder: (index, color) => Icon(
+                //       Icons.star,
+                //       color: color,
+                //     ),
+                //     starCount: 5,
+                //     starSize: 20,
+                //     maxValue: 5,
+                //     starSpacing: 4,
+                //     maxValueVisibility: false,
+                //     valueLabelVisibility: false,
+                //     animationDuration: const Duration(milliseconds: 1000),
+                //     starOffColor: const Color(0xffe7e8ea),
+                //     starColor: Colors.yellow,
+                //   ),
+                // ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _showFeedbackDialog() async {
+    //Show the star value they selected and show a text field to enter feedback optionally
+    //send the feedback to the server
+    //show a toast that the feedback was sent
+    return showDialog(
+      context: Get.context!,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("rate".tr,
+              style: const TextStyle(fontSize: 20, color: Colors.white)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "feedback".tr,
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("cancel".tr,
+                  style: const TextStyle(color: Colors.white)),
+            ),
+            TextButton(
+              onPressed: () {
+                //send feedback
+                Navigator.of(context).pop();
+              },
+              child:
+                  Text("send".tr, style: const TextStyle(color: Colors.white)),
+            ),
+          ],
+        );
+      },
     );
   }
 }
