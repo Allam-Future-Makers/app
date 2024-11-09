@@ -1,4 +1,5 @@
 import 'package:app/constants/translation.dart';
+import 'package:app/constants/ui.dart';
 import 'package:app/ui/screens/auth/login_screen.dart';
 import 'package:app/ui/screens/auth/register_screen.dart';
 import 'package:app/ui/screens/auth/splash_screen.dart';
@@ -33,7 +34,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.deepPurple, brightness: Brightness.dark),
+          seedColor: Colors.deepPurple,
+          brightness: Brightness.dark,
+          primary: UIConstants.primaryColor,
+          secondary: UIConstants.secondaryColor,
+        ),
         useMaterial3: true,
         textTheme: GoogleFonts.cairoTextTheme(),
       ),

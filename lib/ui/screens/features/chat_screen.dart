@@ -11,6 +11,8 @@ import 'package:app/ui/intents/new_line_intent.dart';
 import 'package:app/ui/widgets/chat_message.dart';
 import 'package:app/ui/widgets/glass.dart';
 import 'package:app/utils/utils.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:get/get.dart';
@@ -29,8 +31,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final List<ChatMessage> _messages = [];
   final ImagePicker _picker = ImagePicker();
   final FlutterSoundRecorder _audioRecorder = FlutterSoundRecorder();
-  final StreamController<Uint8List> recordingDataController =
-      StreamController();
+  final AudioPlayer _audioPlayer = AudioPlayer();
   XFile? _image;
   Uint8List? _imageData;
   Uint8List? _voiceData;
@@ -82,8 +83,24 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
-  void _sendMessage() {
-    if (_messageController.text.isNotEmpty) {
+  void _saveRecording() async {
+    _stopRecording();
+    setState(() {
+      _isRecording = false;
+    });
+  }
+
+  void _sendMessage() async {
+    if (_isRecording) {
+      await _stopRecording();
+      setState(() {
+        _isRecording = false;
+      });
+    }
+
+    if (_messageController.text.isNotEmpty ||
+        (_messageController.text.isEmpty && _imageData != null) ||
+        (_messageController.text.isEmpty && _voiceData != null)) {
       final message = ChatMessage(
         query: _messageController.text,
       );
@@ -100,7 +117,8 @@ class _ChatScreenState extends State<ChatScreen> {
             .chat(
                 id: AppState.user.value!.id,
                 query: message.query,
-                imageData: _imageData)
+                imageData: _imageData,
+                voiceData: _voiceData)
             .then((response) {
           message.answer = response.answer;
           message.imageUrl = response.imageUrl;
@@ -138,8 +156,8 @@ class _ChatScreenState extends State<ChatScreen> {
     }
 
     await _audioRecorder.startRecorder(
-      codec: Codec.pcmWebM,
-      toStream: recordingDataController.sink,
+      codec: Codec.defaultCodec,
+      toFile: "AQSA_REC",
     );
     _recordDuration = 0;
     _startTimer();
@@ -148,15 +166,29 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  void _stopRecording() {
-    _audioRecorder.stopRecorder().then((value) {
-      //convert the stream to Uint8List
-      recordingDataController.stream.toList().then((value) {
-        _voiceData = value.first;
-        setState(() {
-          _isRecording = false;
-        });
-      });
+  Future<String?> _stopRecording() async {
+    final filePath = await _audioRecorder.stopRecorder();
+    if (filePath == null) return null;
+    try {
+      final response = await Dio().get(
+        filePath,
+        options: Options(responseType: ResponseType.bytes),
+      );
+      String fileName = filePath.split('/').last;
+      print(fileName);
+      _voiceData = response.data;
+    } on Exception catch (e) {
+      print(e);
+    }
+
+    return filePath;
+  }
+
+  //cancel recording
+  void _cancelRecording() async {
+    await _audioRecorder.stopRecorder();
+    setState(() {
+      _isRecording = false;
     });
   }
 
@@ -231,7 +263,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               child: InkWell(
                                 child: const Icon(
                                   Icons.close,
-                                  color: Colors.white,
+                                  color: UIConstants.primaryColor,
                                 ),
                                 onTap: () {
                                   setState(() {
@@ -244,7 +276,60 @@ class _ChatScreenState extends State<ChatScreen> {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                  const SizedBox(width: 15),
+                  if (_voiceData != null)
+                    Stack(
+                      children: [
+                        //play button
+                        Container(
+                          width: 100,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: InkWell(
+                              child: const Icon(
+                                Icons.play_arrow,
+                                color: UIConstants.primaryColor,
+                              ),
+                              onTap: () async {
+                                await _audioPlayer.setSourceBytes(_voiceData!);
+                                _audioPlayer.resume();
+                              },
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            //rounded
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: InkWell(
+                                child: const Icon(
+                                  Icons.close,
+                                  color: UIConstants.primaryColor,
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    _voiceData = null;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                 ],
               ),
             ),
@@ -256,13 +341,15 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.image),
+                      icon: const Icon(Icons.image,
+                          color: UIConstants.primaryColor),
                       onPressed: () {
                         _pickImage();
                       },
                     ),
                     IconButton(
-                      icon: const Icon(Icons.mic),
+                      icon: const Icon(Icons.mic,
+                          color: UIConstants.primaryColor),
                       onPressed: () {
                         _recordVoice();
                       },
@@ -297,7 +384,8 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.send),
+                      icon: const Icon(Icons.send,
+                          color: UIConstants.primaryColor),
                       onPressed: _sendMessage,
                     ),
                   ],
@@ -311,14 +399,16 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.stop),
+                      icon: const Icon(Icons.stop,
+                          color: UIConstants.primaryColor),
                       onPressed: () {
-                        _stopRecording();
+                        _cancelRecording();
                       },
                     ),
                     IconButton(
                       icon: Icon(
-                          _audioRecorder.isPaused ? Icons.mic : Icons.pause),
+                          _audioRecorder.isPaused ? Icons.mic : Icons.pause,
+                          color: UIConstants.primaryColor),
                       onPressed: () {
                         _pauseResumeRecording();
                       },
@@ -340,8 +430,9 @@ class _ChatScreenState extends State<ChatScreen> {
                               );
                             })),
                     IconButton(
-                      icon: const Icon(Icons.done),
-                      onPressed: _sendMessage,
+                      icon: const Icon(Icons.done,
+                          color: UIConstants.primaryColor),
+                      onPressed: _saveRecording,
                     ),
                   ],
                 ),
