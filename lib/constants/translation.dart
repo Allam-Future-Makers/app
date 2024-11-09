@@ -43,6 +43,7 @@ class AppTranslations {
     "quran_enter": "Enter your question",
     "question_here": "Enter your question here",
     "tashkeel_enter": "Enter the text you want to diacritize",
+    "process": "Process",
   };
 
   static final Map<String, String> ar = {
@@ -77,6 +78,13 @@ class AppTranslations {
     "helper_sentence": "الجملة المساعدة (اختياري)",
     "helper_enter": "أدخل الجملة المساعدة هنا",
     "search": "بحث",
-    "answer": "الإجابة"
+    "answer": "الإجابة",
+    "msa_enter": "أدخل النص الذي تريد تحويله",
+    "convert": "تحويل",
+    "result": "النتيجة",
+    "quran_enter": "أدخل سؤالك",
+    "question_here": "أدخل سؤالك هنا",
+    "tashkeel_enter": "أدخل النص الذي تريد تشكيله",
+    "process": "تشكيل",
   };
 }
